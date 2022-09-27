@@ -23,7 +23,6 @@ public class Kategotrijos {
             inverseJoinColumns = @JoinColumn(name = "knygos_id")
     )
     Set<Knygos> KnygaSuKategorija;
-
     public Kategotrijos() {
     }
 

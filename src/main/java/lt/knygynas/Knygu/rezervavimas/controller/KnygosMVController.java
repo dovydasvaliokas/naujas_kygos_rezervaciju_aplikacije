@@ -31,13 +31,13 @@ public class KnygosMVController {
         Knygos naujaKnyga = new Knygos();
         model.addAttribute("knyga", naujaKnyga);
         model.addAttribute("vartotojas", vartotojoRepository.findById(1));
-        model.addAttribute("autorius", autoriausRepository.findById(1));
-        model.addAttribute("kategorijos", kategorijosRepository.findById(1));
+        model.addAttribute("autorius", autoriausRepository.findAll());
+        //model.addAttribute("kategorijos", kategorijosRepository.findById(1));
         return "ideti_knyga.html";
     }
     @PostMapping("/knyg/ideta_knyga")
     String idedamaKnyga(Model model, @ModelAttribute Knygos knyga){
-        System.out.println("cia vedas");
+        System.out.println("SAVE komanda pasileido");
         knygosRepository.save(knyga);
         return "ideta_knyga.html";
     }
