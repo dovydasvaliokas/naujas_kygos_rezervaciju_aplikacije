@@ -1,6 +1,6 @@
-package lt.knygynas.Knygu.rezervavimas.repository;
+package lt.knygynas.Knygu.rezervavimas.model.repository;
 
-import lt.knygynas.Knygu.rezervavimas.entity.Knygos;
+import lt.knygynas.Knygu.rezervavimas.model.entity.Knygos;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

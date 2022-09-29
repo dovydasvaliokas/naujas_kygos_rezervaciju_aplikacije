@@ -1,9 +1,9 @@
-package lt.knygynas.Knygu.rezervavimas.repository;
+package lt.knygynas.Knygu.rezervavimas.model.repository;
 
-import lt.knygynas.Knygu.rezervavimas.entity.Autorius;
+import lt.knygynas.Knygu.rezervavimas.model.entity.Autorius;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AutoriausRepository extends JpaRepository<Autorius, Integer> {
-    Autorius findByPavadinimas(String pavadimas);
+    Autorius findByVardas(String vardas);
     Autorius findById(int id);
 }

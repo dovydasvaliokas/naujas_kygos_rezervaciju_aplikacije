@@ -1,4 +1,4 @@
-package lt.knygynas.Knygu.rezervavimas.entity;
+package lt.knygynas.Knygu.rezervavimas.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

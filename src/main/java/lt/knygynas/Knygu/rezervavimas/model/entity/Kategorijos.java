@@ -1,4 +1,4 @@
-package lt.knygynas.Knygu.rezervavimas.entity;
+package lt.knygynas.Knygu.rezervavimas.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Kategotrijos {
+public class Kategorijos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -22,15 +22,15 @@ public class Kategotrijos {
             joinColumns = @JoinColumn(name = "kategorijos_id"),
             inverseJoinColumns = @JoinColumn(name = "knygos_id")
     )
-    Set<Knygos> KnygaSuKategorija;
-    public Kategotrijos() {
+    Set<Knygos> knygaSuKategorija;
+    public Kategorijos() {
     }
 
-    public Kategotrijos(int id, String pavadinimas, String aprasymas, Set<Knygos> knygaSuKategorija) {
+    public Kategorijos(int id, String pavadinimas, String aprasymas, Set<Knygos> knygaSuKategorija) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.aprasymas = aprasymas;
-        KnygaSuKategorija = knygaSuKategorija;
+        this.knygaSuKategorija = knygaSuKategorija;
     }
 
     public int getId() {
@@ -58,11 +58,11 @@ public class Kategotrijos {
     }
 
     public Set<Knygos> getKnygaSuKategorija() {
-        return KnygaSuKategorija;
+        return knygaSuKategorija;
     }
 
     public void setKnygaSuKategorija(Set<Knygos> knygaSuKategorija) {
-        KnygaSuKategorija = knygaSuKategorija;
+        this.knygaSuKategorija = knygaSuKategorija;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class Kategotrijos {
                 "id=" + id +
                 ", pavadinimas='" + pavadinimas + '\'' +
                 ", aprasymas='" + aprasymas + '\'' +
-                ", KnygaSuKategorija=" + KnygaSuKategorija +
+                ", KnygaSuKategorija=" + knygaSuKategorija +
                 '}';
     }
 }

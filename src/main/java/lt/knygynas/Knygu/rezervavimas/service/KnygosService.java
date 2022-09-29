@@ -1,8 +1,8 @@
 package lt.knygynas.Knygu.rezervavimas.service;
 
-import lt.knygynas.Knygu.rezervavimas.entity.Autorius;
-import lt.knygynas.Knygu.rezervavimas.repository.AutoriausRepository;
-import lt.knygynas.Knygu.rezervavimas.repository.KnygosRepository;
+import lt.knygynas.Knygu.rezervavimas.model.entity.Autorius;
+import lt.knygynas.Knygu.rezervavimas.model.repository.AutoriausRepository;
+import lt.knygynas.Knygu.rezervavimas.model.repository.KnygosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class KnygosService {
     public Set<Autorius> konvertavimasIsStringISet(String autoriai){
         Set<Autorius> autSet = new HashSet<>();
         for (String autorius : autoriai.split(",")){
-            autSet.add(autoriausRepository.findByPavadinimas(autorius));
+            autSet.add(autoriausRepository.findByVardas(autorius));
         }
         return autSet;
     }

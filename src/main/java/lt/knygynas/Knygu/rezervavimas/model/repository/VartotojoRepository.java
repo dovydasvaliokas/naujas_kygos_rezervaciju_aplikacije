@@ -1,6 +1,6 @@
-package lt.knygynas.Knygu.rezervavimas.repository;
+package lt.knygynas.Knygu.rezervavimas.model.repository;
 
-import lt.knygynas.Knygu.rezervavimas.entity.Vartotojas;
+import lt.knygynas.Knygu.rezervavimas.model.entity.Vartotojas;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VartotojoRepository extends JpaRepository<Vartotojas,Integer> {

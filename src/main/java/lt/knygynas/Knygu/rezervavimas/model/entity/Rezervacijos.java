@@ -1,9 +1,6 @@
-package lt.knygynas.Knygu.rezervavimas.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package lt.knygynas.Knygu.rezervavimas.model.entity;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Rezervacijos {

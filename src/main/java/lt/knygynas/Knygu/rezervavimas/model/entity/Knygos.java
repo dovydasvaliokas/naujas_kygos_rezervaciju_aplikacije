@@ -1,4 +1,4 @@
-package lt.knygynas.Knygu.rezervavimas.entity;
+package lt.knygynas.Knygu.rezervavimas.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -47,12 +47,12 @@ public class Knygos {
             joinColumns = @JoinColumn(name = "knygos_id"),
             inverseJoinColumns = @JoinColumn(name = "kategorijos_id")
     )
-    Set<Kategotrijos> knygosKategorijos;
+    Set<Kategorijos> knygosKategorijos;
 
     public Knygos() {
     }
 
-    public Knygos(int id, String pavadinimas, int puslapiuSkait, String aprasymas, String turinys, int kiekis, Set<Vartotojas> knygosVartotojei, Set<Autorius> knygosAutorius, Set<Kategotrijos> knygosKategorijos) {
+    public Knygos(int id, String pavadinimas, int puslapiuSkait, String aprasymas, String turinys, int kiekis, Set<Vartotojas> knygosVartotojei, Set<Autorius> knygosAutorius, Set<Kategorijos> knygosKategorijos) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.puslapiuSkait = puslapiuSkait;
@@ -129,11 +129,11 @@ public class Knygos {
         this.knygosAutorius = knygosAutorius;
     }
 
-    public Set<Kategotrijos> getKnygosKategorijos() {
+    public Set<Kategorijos> getKnygosKategorijos() {
         return knygosKategorijos;
     }
 
-    public void setKnygosKategorijos(Set<Kategotrijos> knygosKategorijos) {
+    public void setKnygosKategorijos(Set<Kategorijos> knygosKategorijos) {
         this.knygosKategorijos = knygosKategorijos;
     }
 

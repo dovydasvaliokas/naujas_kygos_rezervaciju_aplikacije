@@ -7,10 +7,12 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+          <script src="javaScript.js"></script>
 </head>
 <body>
 <div class="container">
-    <h1>Recepto įdėjimas</h1>
+    <h1 >Recepto įdėjimas</h1>
     <hr>
     <h2>Įveskite recepto duomenis</h2>
 
@@ -20,9 +22,21 @@
         <input th:field="*{puslapiuSkait}" type="text"  placeholder="Puslapiu skaicius" class="form-control mb-4 col-4">
         <input th:field="*{aprasymas}" type="text"  placeholder="knygos aprasymas" class="form-control mb-4 col-4">
         <input th:field="*{turinys}" type="text"  placeholder="knygos turinys" class="form-control mb-4 col-4">
+        <p>turimu kopiju kiekis</p>
         <input th:value="${kiekis}" type="text" name="turimu kopiju kiekis" >
-        <input th:value="${autorius}" type="text" name="autoriai" >
-        <button type="submit" class="btn btn-info col-2">Išsaugokite knyga</button>
+        <p>autorius</p>
+        <input th:value="${autorius}" type="text" name="autorius" >
+
+        <p>
+            <label>kategorijos:
+                <input type="checkbox" name="kategorijos"
+                       th:each="kategorija : ${kategorijos}"
+                       th:text="${kategorija.getPavadinimas}"
+                       th:value="${kategorija.getId}"
+                       th:field="*{knygosKategorijos}"
+                />
+            </label>
+        </p>
 
     </form>
 
