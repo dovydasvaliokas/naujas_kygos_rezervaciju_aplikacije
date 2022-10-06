@@ -13,8 +13,6 @@ public class Kategorijos {
 
     private String pavadinimas;
 
-    private String aprasymas;
-
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -26,10 +24,9 @@ public class Kategorijos {
     public Kategorijos() {
     }
 
-    public Kategorijos(int id, String pavadinimas, String aprasymas, Set<Knygos> knygaSuKategorija) {
+    public Kategorijos(int id, String pavadinimas, Set<Knygos> knygaSuKategorija) {
         this.id = id;
         this.pavadinimas = pavadinimas;
-        this.aprasymas = aprasymas;
         this.knygaSuKategorija = knygaSuKategorija;
     }
 
@@ -49,14 +46,6 @@ public class Kategorijos {
         this.pavadinimas = pavadinimas;
     }
 
-    public String getAprasymas() {
-        return aprasymas;
-    }
-
-    public void setAprasymas(String aprasymas) {
-        this.aprasymas = aprasymas;
-    }
-
     public Set<Knygos> getKnygaSuKategorija() {
         return knygaSuKategorija;
     }
@@ -70,7 +59,6 @@ public class Kategorijos {
         return "Kategotrijos{" +
                 "id=" + id +
                 ", pavadinimas='" + pavadinimas + '\'' +
-                ", aprasymas='" + aprasymas + '\'' +
                 ", KnygaSuKategorija=" + knygaSuKategorija +
                 '}';
     }

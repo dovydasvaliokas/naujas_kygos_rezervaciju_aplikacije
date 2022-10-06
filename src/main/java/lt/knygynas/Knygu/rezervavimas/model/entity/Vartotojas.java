@@ -19,7 +19,7 @@ public class Vartotojas {
     @ManyToMany
     @JoinTable(
             name = "vartotojas_knygos",
-            joinColumns = @JoinColumn(name = "varotojas_id"),
+            joinColumns = @JoinColumn(name = "vartotojas_id"),
             inverseJoinColumns = @JoinColumn(name = "knygos_id")
     )
     Set<Knygos> vartotojoKnygos;

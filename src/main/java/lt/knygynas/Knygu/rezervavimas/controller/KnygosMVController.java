@@ -11,11 +11,9 @@ import lt.knygynas.Knygu.rezervavimas.service.KnygosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -31,6 +29,12 @@ public class KnygosMVController {
     @Autowired
     KnygosService knygosService;
 
+    @GetMapping("/knyg/visos_knygos")
+    String rodytiVisasKnygas(Model model) {
+        List<Knygos> visosKnygos = knygosRepository.findAll();
+        model.addAttribute("visosKnygos", visosKnygos);
+        return "rodyti_knygas.html";
+    }
     @GetMapping("/knyg/knygos_idejimas")
     String knygosIdejimas(Model model){
         Vartotojas vartotojas;
@@ -43,8 +47,43 @@ public class KnygosMVController {
     String idedamaKnyga(Model model, @ModelAttribute Knygos knyga, @RequestParam String autorius){
         System.out.println("SAVE komanda pasileido");
         Set<Autorius> autoriusVardas = knygosService.konvertavimasIsStringISet(autorius);
-        knyga.setKnygosAutorius(autoriusVardas);
+        knyga.setKnygosAutoriai(autoriusVardas);
         knygosRepository.save(knyga);
         return "ideta_knyga.html";
+    }
+
+    @GetMapping("/knyg/rasti_knyga_id")
+    String ieskomaKnygaPagalId(Model model,@RequestParam int id){
+        Knygos knyga = knygosRepository.findById(id);
+        model.addAttribute("id" , knyga.getId());
+        model.addAttribute("pavadinimas", knyga.getPavadinimas());
+        model.addAttribute("puslapiuSkait", knyga.getPuslapiuSkait());
+        model.addAttribute("aprasymasd", knyga.getAprasymas());
+        model.addAttribute("turinys", knyga.getTurinys());
+        model.addAttribute("kiekis", knyga.getKiekis());
+        model.addAttribute("knygosVartotojei", knyga.getKnygosVartotojei());
+        model.addAttribute("knygosAutorius", knyga.getKnygosAutoriai());
+        model.addAttribute("knygosKategorijos", knyga.getKnygosKategorijos());
+        return "parodyti_knyga.html";
+    }
+
+    @GetMapping("/knyg/rasti_knyga")
+    String ieskomaKnyga(Model model , @RequestParam String pavadinimas){
+        Knygos knyga = knygosRepository.findByPavadinimas(pavadinimas);
+        model.addAttribute("id", knyga.getId());
+        model.addAttribute("pavadinimas", knyga.getPavadinimas());
+        model.addAttribute("puslapiuSkait", knyga.getPuslapiuSkait());
+        model.addAttribute("aprasymas", knyga.getAprasymas());
+        model.addAttribute("turinys" , knyga.getKiekis());
+        model.addAttribute("kategorijos", knyga.getKnygosKategorijos());
+        model.addAttribute("autoriai", knyga.getKnygosAutoriai());
+        model.addAttribute("vartotojas", knyga.getKnygosVartotojei());
+        return "parodyti_knyga.html";
+    }
+
+    @PostMapping("/knyg/istrinti_knyga/{id}")
+    String istrintiKyga(Model model, @PathVariable int id) {
+        knygosRepository.delete(knygosRepository.findById(id));
+        return "istrinta_knyga.html";
     }
 }

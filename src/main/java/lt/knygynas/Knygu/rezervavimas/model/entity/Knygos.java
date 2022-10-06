@@ -38,7 +38,7 @@ public class Knygos {
             joinColumns = @JoinColumn(name = "knygos_id"),
             inverseJoinColumns = @JoinColumn(name = "autoriaus_id")
     )
-    Set<Autorius> knygosAutorius;
+    Set<Autorius> knygosAutoriai;
 
     @JsonIgnore
     @ManyToMany
@@ -52,7 +52,7 @@ public class Knygos {
     public Knygos() {
     }
 
-    public Knygos(int id, String pavadinimas, int puslapiuSkait, String aprasymas, String turinys, int kiekis, Set<Vartotojas> knygosVartotojei, Set<Autorius> knygosAutorius, Set<Kategorijos> knygosKategorijos) {
+    public Knygos(int id, String pavadinimas, int puslapiuSkait, String aprasymas, String turinys, int kiekis, Set<Vartotojas> knygosVartotojei, Set<Autorius> knygosAutoriai, Set<Kategorijos> knygosKategorijos) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.puslapiuSkait = puslapiuSkait;
@@ -60,7 +60,7 @@ public class Knygos {
         this.turinys = turinys;
         this.kiekis = kiekis;
         this.knygosVartotojei = knygosVartotojei;
-        this.knygosAutorius = knygosAutorius;
+        this.knygosAutoriai = knygosAutoriai;
         this.knygosKategorijos = knygosKategorijos;
     }
 
@@ -121,12 +121,12 @@ public class Knygos {
         this.knygosVartotojei = knygosVartotojei;
     }
 
-    public Set<Autorius> getKnygosAutorius() {
-        return knygosAutorius;
+    public Set<Autorius> getKnygosAutoriai() {
+        return knygosAutoriai;
     }
 
-    public void setKnygosAutorius(Set<Autorius> knygosAutorius) {
-        this.knygosAutorius = knygosAutorius;
+    public void setKnygosAutoriai(Set<Autorius> knygosAutoriai) {
+        this.knygosAutoriai = knygosAutoriai;
     }
 
     public Set<Kategorijos> getKnygosKategorijos() {
