@@ -28,10 +28,8 @@
             <select th:field="*{knygosKategorijos.id}" class="form-control" id="dropDownList">
                 <option th:each="kategorija : ${kategorijos}" th:value="${kategorijos.getId()}" th:text="${kategorijos.getPavadinimas()}" th:selected="knygosKategorijos.id"></option>
             </select>
-            <select th:field="*{knygosAutoriai.id}" class="form-control" id="dropDownList">
-                <option th:each="Autorius : ${knygosAutoriai}" th:value="${autoriai.getId()}" th:text="${autoriai.getPavadinimas()}" th:selected="knygosAutoriai.id"></option>
-            </select>
-            <button type="submit" class="btn btn-info col-2">Išsaugokite knyga</button>
+
+            <button type="submit" class="btn btn-info col-2">Issaugokite knyga</button>
         </form>
     </div>
 </body>

@@ -15,8 +15,24 @@
   <div th:insert="/fragments/header :: header"></div>
   <div th:insert="/fragments/navbar :: navbar"></div>
   <div th:insert="/fragments/katNavbar :: katNavbar"></div>
+  <div class="container d-flex flex-column  align-items-center">
+      <div class="row col-8">
+          <div class="input-group">
+              <form th:action="@{/kategorija/rasti_pagal_kategorija}" class="d-flex w-100" method="get">
+                  <input type="text"name="pavadinimas" class="form-control" placeholder="?veskite recepto pavadinim?...">
+                  <div class="input-group-append">
+                      <button class="btn btn-secondary" type="submit">
+                          Ie?koti
+                      </button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+      <p class="mt-4 text-center">?veskite pavadinim?, knygos, kurio norite ie?koti.</p>
 <div th:each="kategorija : ${visosKategorijos}" class="list-group">
   <a th:text="${kategorija.getPavadinimas()}" th:href="@{/kategorijos/rodyti_knygas/(id=${kategorija.getId()})}" class="list-group-item list-group-item-action"></a>
 </div>
+<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

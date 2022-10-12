@@ -57,3 +57,8 @@ a:hover {
 .contetnt_wrapper {
     height: 3000px;
 }
+
+.pastraipa {
+    display: flex;
+    justify-content: center;
+}

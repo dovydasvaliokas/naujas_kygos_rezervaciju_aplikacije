@@ -48,4 +48,12 @@ public class KategorijosMVController {
         model.addAttribute("kategorijosPavadinimas" , kategorija.getPavadinimas());
         return "kategorijos_knygos.html";
     }
+
+    @GetMapping("/kategorija/rasti_pagal_kategorija")
+    String ieskomaKategorija(Model model, @RequestParam String pavadinimas){
+        Kategorijos kategorija = kategorijosRepository.findByPavadinimas(pavadinimas);
+        model.addAttribute("kategorijosKnygos" ,kategorija.getKnygaSuKategorija() );
+        model.addAttribute("kategorijosPavadinimas", kategorija.getPavadinimas());
+        return "kategorijos_knygos.html";
+    }
 }
