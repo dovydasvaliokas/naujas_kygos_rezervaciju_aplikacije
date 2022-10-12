@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="html_head">
+    <meta charset="ISO-8859-1">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <script src="javaScript.js"></script>
+    <title>redaguoti knyga</title>
+</head>
+<body>
+    <div th:insert="/fragments/header :: header"></div>
+    <div th:isert="/fragments/navbar :: navbar"></div>
+    <div class="container">
+        <h1>knygos redagavimas</h1>
+        <hr>
+        <h2>Paredaguokite knygos duomenis</h2>
+    
+        <form th:action="@{/knyg/ideta_knyga}" th:object="${knygos}" method="POST">
+            <input type="hidden" th:field="*{id}">
+            <input th:field="*{pavadinimas}" type="text"  class="form-control mb-4 col-4">
+            <input th:field="*{aprasymas}" type="text"  class="form-control mb-4 col-4">
+            <input th:field="*{turinys}" type="text"  class="form-control mb-4 col-4">
+            <input th:field="*{puslapiuSkait}" type="number"  class="form-control mb-4 col-4">
+            <input th:field="*{kiekis}" type="number"  class="form-control mb-4 col-4">
+            <select th:field="*{knygosKategorijos.id}" class="form-control" id="dropDownList">
+                <option th:each="kategorija : ${kategorijos}" th:value="${kategorijos.getId()}" th:text="${kategorijos.getPavadinimas()}" th:selected="knygosKategorijos.id"></option>
+            </select>
+            <select th:field="*{knygosAutoriai.id}" class="form-control" id="dropDownList">
+                <option th:each="Autorius : ${knygosAutoriai}" th:value="${autoriai.getId()}" th:text="${autoriai.getPavadinimas()}" th:selected="knygosAutoriai.id"></option>
+            </select>
+            <button type="submit" class="btn btn-info col-2">Išsaugokite knyga</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -13,8 +13,21 @@
 <body>
   <div th:insert="fragments/header :: header"></div>
   <div th:insert="fragments/navbar :: navbar"></div>
+  <div class="container d-flex flex-column  align-items-center"></div>
+    <div class="row col-8">
+      <div class="input-group">
+        <form th:action="@{/knyg/rasti_knyga}" class="d-flex w-100" method="get">
+          <input type="text"name="pavadinimas" class="form-control" placeholder="Iveskite knygos pavadinima...">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="submit">
+              Ie?koti
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
     <div th:each="knygos : ${visosKnygos}" class="list-group">
-        <a th:text=" ${knygos.getPavadinimas()}" th:href="@{/knyg/rasti_knyga_id/(id=${knygos.getId()})}" class="list-group-item list-group-item-action"></a>
+        <a th:text=" ${knygos.getPavadinimas()} + ' ' + ${knygos.getAprasymas()}" th:href="@{/knyg/rasti_knyga_id/(id=${knygos.getId()})}" class="list-group-item list-group-item-action"></a>
     </div>
     <div th:insert="/fragments/footer :: footer"></div>
 </body>

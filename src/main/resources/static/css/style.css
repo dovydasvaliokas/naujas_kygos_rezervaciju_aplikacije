@@ -26,7 +26,7 @@ a:hover {
 .navbt {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items:center;
     background-color: #6F9DC5;
     border-color: #9481EB;
     margin: 10px;
@@ -39,6 +39,7 @@ a:hover {
     border-color: #787289;
     justify-self:baseline;
     align-items: center;
+    width: 100%;
 }
 
 .kategorijos {

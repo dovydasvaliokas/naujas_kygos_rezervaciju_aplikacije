@@ -29,6 +29,11 @@ public class KnygosMVController {
     @Autowired
     KnygosService knygosService;
 
+    @GetMapping("/knyg/paieska")
+    String ieskomaKnyga(Model model){
+        return "rasti_knyga.html";
+    }
+
     @GetMapping("/knyg/visos_knygos")
     String rodytiVisasKnygas(Model model) {
         List<Knygos> visosKnygos = knygosRepository.findAll();
@@ -58,11 +63,11 @@ public class KnygosMVController {
         model.addAttribute("id" , knyga.getId());
         model.addAttribute("pavadinimas", knyga.getPavadinimas());
         model.addAttribute("puslapiuSkait", knyga.getPuslapiuSkait());
-        model.addAttribute("aprasymasd", knyga.getAprasymas());
+        model.addAttribute("aprasymas", knyga.getAprasymas());
         model.addAttribute("turinys", knyga.getTurinys());
         model.addAttribute("kiekis", knyga.getKiekis());
         model.addAttribute("knygosVartotojei", knyga.getKnygosVartotojei());
-        model.addAttribute("knygosAutorius", knyga.getKnygosAutoriai());
+        model.addAttribute("KnygosAutoriai", knyga.getKnygosAutoriai());
         model.addAttribute("knygosKategorijos", knyga.getKnygosKategorijos());
         return "parodyti_knyga.html";
     }
@@ -74,10 +79,11 @@ public class KnygosMVController {
         model.addAttribute("pavadinimas", knyga.getPavadinimas());
         model.addAttribute("puslapiuSkait", knyga.getPuslapiuSkait());
         model.addAttribute("aprasymas", knyga.getAprasymas());
-        model.addAttribute("turinys" , knyga.getKiekis());
-        model.addAttribute("kategorijos", knyga.getKnygosKategorijos());
-        model.addAttribute("autoriai", knyga.getKnygosAutoriai());
-        model.addAttribute("vartotojas", knyga.getKnygosVartotojei());
+        model.addAttribute("turinys" , knyga.getTurinys());
+        model.addAttribute("kiekis", knyga.getKiekis());
+        model.addAttribute("knygosVartotojei", knyga.getKnygosVartotojei());
+        model.addAttribute("KnygosAutoriai", knyga.getKnygosAutoriai());
+        model.addAttribute("knygosKategorijos", knyga.getKnygosKategorijos());
         return "parodyti_knyga.html";
     }
 
@@ -85,5 +91,14 @@ public class KnygosMVController {
     String istrintiKyga(Model model, @PathVariable int id) {
         knygosRepository.delete(knygosRepository.findById(id));
         return "istrinta_knyga.html";
+    }
+
+    @GetMapping("/knyg/redaguoti_knyga/{id}")
+    String redaguojamaKnyga(Model model, @RequestParam int id){
+        Knygos knyga = knygosRepository.findById(id);
+        model.addAttribute("knyga", knyga);
+        model.addAttribute("kategorijos", kategorijosRepository.findAll());
+        model.addAttribute("autoriai", autoriausRepository.findAll());
+        return "redaguoti_knyga.html";
     }
 }

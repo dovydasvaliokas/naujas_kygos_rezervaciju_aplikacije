@@ -14,6 +14,7 @@
 <div th:insert="/fragments/header :: header"></div>
 <div th:insert="/fragments/navbar :: navbar"></div>
 <table class="table table-striped">
+    <input type="hidden" th:field="*{id}">
   <tr>
       <th>Pavadinimas</th>
       <td th:text="${pavadinimas}"></td>
@@ -45,30 +46,26 @@
   </tr>
   <th>Autoriai:</th>
       <td>
-          <ul th:each="autorius : ${knygosAutoriai}" class="list-group">
+          <ul th:each="autorius : ${KnygosAutoriai}" class="list-group">
               <li th:text="${autorius.getVardas}" class="list-group-item"></li>
           </ul>
       </td>
   </tr>
 </table>
-<form th:action="@{/recep/paieska}">
-<button class="btn btn-secondary" type="submit">Eiti i receptu paieska pagal pavadinima</button>
+<form th:action="@{/knyg/visos_knygos}">
+<button class="btn btn-secondary" type="submit">Eiti atgal</button>
 </form>
 <br>
 <form th:action="@{'/knyg/istrinti_knyga/' + ${id}}" method="post">
   <input type="submit" value="Ištrinti knyga">
 </form>
 <br>
-<form th:action="@{'/vartotojas/pamegti_recepta/' + ${id}}" method="post">
-  <input type="submit" value="Pridėti receptą į mėgstamus">
+<form th:action="@{'/vartotojas/pamegti_knyga/' + ${id}}" method="post">
+  <input type="submit" value="Pridėti knyga į mėgstamus">
 </form>
 <br>
-<form th:action="@{'/recep/ideti_ingredientus/' + ${id}}" method="get">
-  <input type="submit" value="Pridėti recepto ingredientus">
-</form>
-<br>
-<form th:action="@{'/recep/redaguoti_recepta/' + ${id}}" method="get">
-  <input type="submit" value="Redaguoti receptą">
+<form th:action="@{'/knyg/redaguoti_knyga/' + ${id}}" method="get">
+  <input type="submit" value="Redaguoti knyga">
 </form>
 <div th:insert="/fragments/footer :: footer"></div>
 </body>
