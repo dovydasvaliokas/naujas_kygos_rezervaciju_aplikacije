@@ -12,22 +12,32 @@
 </head>
 <body>
     <div th:insert="/fragments/header :: header"></div>
-    <div th:isert="/fragments/navbar :: navbar"></div>
+    <div th:insert="/fragments/navbar :: navbar"></div>
     <div class="container">
         <h1>knygos redagavimas</h1>
         <hr>
         <h2>Paredaguokite knygos duomenis</h2>
     
-        <form th:action="@{/knyg/ideta_knyga}" th:object="${knygos}" method="POST">
+        <form th:action="@{/knyg/ideta_knyga}" th:object="${knyga}" method="POST">
             <input type="hidden" th:field="*{id}">
             <input th:field="*{pavadinimas}" type="text"  class="form-control mb-4 col-4">
             <input th:field="*{aprasymas}" type="text"  class="form-control mb-4 col-4">
             <input th:field="*{turinys}" type="text"  class="form-control mb-4 col-4">
             <input th:field="*{puslapiuSkait}" type="number"  class="form-control mb-4 col-4">
             <input th:field="*{kiekis}" type="number"  class="form-control mb-4 col-4">
-            <select th:field="*{knygosKategorijos.id}" class="form-control" id="dropDownList">
-                <option th:each="kategorija : ${kategorijos}" th:value="${kategorijos.getId()}" th:text="${kategorijos.getPavadinimas()}" th:selected="knygosKategorijos.id"></option>
+            <select th:field="*{receptoKategorija.id}" class="form-control" id="dropDownList">
+                <option th:each="kategorija : ${kategorijos}" th:value="${kategorija.getId()}" th:text="${kategorija.getPavadinimas()}" th:selected="receptoKategorija.id"></option>
             </select>
+            <div>
+                <label>kategorijos:
+                    <input class="kategorijos" type="checkbox" name="kategorijos"
+                           th:each="kategorija : ${kategorijos}"
+                           th:text="${kategorija.getPavadinimas}"
+                           th:value="${kategorija.getId}"
+                           th:field="*{knygosKategorijos}"
+                    />
+                </label>
+            </div>
 
             <button type="submit" class="btn btn-info col-2">Issaugokite knyga</button>
         </form>

@@ -94,11 +94,11 @@ public class KnygosMVController {
     }
 
     @GetMapping("/knyg/redaguoti_knyga/{id}")
-    String redaguojamaKnyga(Model model, @RequestParam int id){
+    String redaguojamaKnyga(Model model, @PathVariable  int id){
         Knygos knyga = knygosRepository.findById(id);
         model.addAttribute("knyga", knyga);
         model.addAttribute("kategorijos", kategorijosRepository.findAll());
-        model.addAttribute("autoriai", autoriausRepository.findAll());
+        model.addAttribute("autorius", knygosService.konvertavimasIsSetIString(knyga.getKnygosAutoriai()));
         return "redaguoti_knyga.html";
     }
 }
