@@ -16,6 +16,12 @@ public class KategorijosMVController {
     @Autowired
     KategorijosRepository kategorijosRepository;
 
+    @PostMapping("/kategorija/istrinti_kategorija")
+    String istrintiKategorija(Model model,@RequestParam int id){
+        kategorijosRepository.delete(kategorijosRepository.findById(id));
+        return "kategorija_istrinta.html";
+    }
+
     @GetMapping("/kategorija/nauja_kategorija")
     String naujaKategorija(){
         return "ideti_kategorija.html";
@@ -44,6 +50,7 @@ public class KategorijosMVController {
     @GetMapping("/kategorijos/rodyti_knygas")
     String rodytiKategorijjosknygos(Model model,@RequestParam int id){
         Kategorijos kategorija = kategorijosRepository.findById(id);
+        model.addAttribute("id", kategorija.getId());
         model.addAttribute("kategorijosKnygos" , kategorija.getKnygaSuKategorija());
         model.addAttribute("kategorijosPavadinimas" , kategorija.getPavadinimas());
         return "kategorijos_knygos.html";
@@ -56,4 +63,5 @@ public class KategorijosMVController {
         model.addAttribute("kategorijosPavadinimas", kategorija.getPavadinimas());
         return "kategorijos_knygos.html";
     }
+
 }

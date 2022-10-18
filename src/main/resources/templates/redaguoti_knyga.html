@@ -25,9 +25,7 @@
             <input th:field="*{turinys}" type="text"  class="form-control mb-4 col-4">
             <input th:field="*{puslapiuSkait}" type="number"  class="form-control mb-4 col-4">
             <input th:field="*{kiekis}" type="number"  class="form-control mb-4 col-4">
-            <select th:field="*{receptoKategorija.id}" class="form-control" id="dropDownList">
-                <option th:each="kategorija : ${kategorijos}" th:value="${kategorija.getId()}" th:text="${kategorija.getPavadinimas()}" th:selected="receptoKategorija.id"></option>
-            </select>
+            <input th:value="${autorius}" type="text"  class="form-control mb-4 col-4" name="autorius">
             <div>
                 <label>kategorijos:
                     <input class="kategorijos" type="checkbox" name="kategorijos"
@@ -42,5 +40,6 @@
             <button type="submit" class="btn btn-info col-2">Issaugokite knyga</button>
         </form>
     </div>
+    <div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>

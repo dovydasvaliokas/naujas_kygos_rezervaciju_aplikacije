@@ -28,15 +28,24 @@ public class Vartotojas {
     @OneToMany(mappedBy = "kurisUzRezervavo")
     Set<Rezervacijos> vartotojoRezervacijos;
 
+    @ManyToMany
+    @JoinTable(
+            name = "vartotoju_megstamos_knygos",
+            joinColumns = @JoinColumn(name = "vartotojo_id"),
+            inverseJoinColumns = @JoinColumn(name = "knygos_id")
+    )
+    private Set<Knygos> megstamosKnygos;
+
     public Vartotojas() {
     }
 
-    public Vartotojas(int id, String username, String password, Set<Knygos> vartotojoKnygos, Set<Rezervacijos> vartotojoRezervacijos) {
+    public Vartotojas(int id, String username, String password, Set<Knygos> vartotojoKnygos, Set<Rezervacijos> vartotojoRezervacijos, Set<Knygos> megstamosKnygos) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.vartotojoKnygos = vartotojoKnygos;
         this.vartotojoRezervacijos = vartotojoRezervacijos;
+        this.megstamosKnygos = megstamosKnygos;
     }
 
     public int getId() {
@@ -79,6 +88,14 @@ public class Vartotojas {
         this.vartotojoRezervacijos = vartotojoRezervacijos;
     }
 
+    public Set<Knygos> getMegstamosKnygos() {
+        return megstamosKnygos;
+    }
+
+    public void setMegstamosKnygos(Set<Knygos> megstamosKnygos) {
+        this.megstamosKnygos = megstamosKnygos;
+    }
+
     @Override
     public String toString() {
         return "Vartotojas{" +
@@ -87,6 +104,7 @@ public class Vartotojas {
                 ", password='" + password + '\'' +
                 ", vartotojoKnygos=" + vartotojoKnygos +
                 ", vartotojoRezervacijos=" + vartotojoRezervacijos +
+                ", megstamosKnygos=" + megstamosKnygos +
                 '}';
     }
 }

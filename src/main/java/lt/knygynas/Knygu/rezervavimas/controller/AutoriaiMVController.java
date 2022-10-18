@@ -19,7 +19,7 @@ public class AutoriaiMVController {
 
     @GetMapping("/aut/naujas_autorius")
     String naujasAutorius() {
-        return "ideti_autorius.html";
+        return "ideti_autoriu.html";
     }
 
     @PostMapping("/aut/idedamas_autorius")
@@ -29,7 +29,7 @@ public class AutoriaiMVController {
         autorius.setPavarde(pavarde);
         autorius.setAprasymas(aprasymas);
         autoriausRepository.save(autorius);
-        return "ideta_autorius.html";
+        return "idetas_autorius.html";
     }
 
     @GetMapping("/aut/knygos_pagal_autoriu")

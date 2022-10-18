@@ -29,6 +29,9 @@
     <div th:each="knygos : ${visosKnygos}" class="list-group">
         <a th:text=" ${knygos.getPavadinimas()} + ' ' + ${knygos.getAprasymas()}" th:href="@{/knyg/rasti_knyga_id/(id=${knygos.getId()})}" class="list-group-item list-group-item-action"></a>
     </div>
+  <form th:action="@{'/knyg/istrinti_knyga/' + ${id}}" method="post">
+    <input type="submit" value="Istrinti knyga">
+  </form>
     <div th:insert="/fragments/footer :: footer"></div>
 </body>
 </html>

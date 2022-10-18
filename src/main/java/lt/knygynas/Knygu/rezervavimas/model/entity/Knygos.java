@@ -49,10 +49,18 @@ public class Knygos {
     )
     Set<Kategorijos> knygosKategorijos;
 
+    @ManyToMany
+    @JoinTable(
+            name = "vartotoju_megstamos_knygos",
+            joinColumns = @JoinColumn(name = "knygos_id"),
+            inverseJoinColumns = @JoinColumn(name = "vartotojo_id")
+    )
+    private Set<Vartotojas> vartotojoPamegtaKnyga;
+
     public Knygos() {
     }
 
-    public Knygos(int id, String pavadinimas, int puslapiuSkait, String aprasymas, String turinys, int kiekis, Set<Vartotojas> knygosVartotojei, Set<Autorius> knygosAutoriai, Set<Kategorijos> knygosKategorijos) {
+    public Knygos(int id, String pavadinimas, int puslapiuSkait, String aprasymas, String turinys, int kiekis, Set<Vartotojas> knygosVartotojei, Set<Autorius> knygosAutoriai, Set<Kategorijos> knygosKategorijos, Set<Vartotojas> vartotojoPamegtaKnyga) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.puslapiuSkait = puslapiuSkait;
@@ -62,8 +70,8 @@ public class Knygos {
         this.knygosVartotojei = knygosVartotojei;
         this.knygosAutoriai = knygosAutoriai;
         this.knygosKategorijos = knygosKategorijos;
+        this.vartotojoPamegtaKnyga = vartotojoPamegtaKnyga;
     }
-
 
     public int getId() {
         return id;
@@ -137,5 +145,27 @@ public class Knygos {
         this.knygosKategorijos = knygosKategorijos;
     }
 
+    public Set<Vartotojas> getVartotojoPamegtaKnyga() {
+        return vartotojoPamegtaKnyga;
+    }
 
+    public void setVartotojoPamegtaKnyga(Set<Vartotojas> vartotojoPamegtaKnyga) {
+        this.vartotojoPamegtaKnyga = vartotojoPamegtaKnyga;
+    }
+
+    @Override
+    public String toString() {
+        return "Knygos{" +
+                "id=" + id +
+                ", pavadinimas='" + pavadinimas + '\'' +
+                ", puslapiuSkait=" + puslapiuSkait +
+                ", aprasymas='" + aprasymas + '\'' +
+                ", turinys='" + turinys + '\'' +
+                ", kiekis=" + kiekis +
+                ", knygosVartotojei=" + knygosVartotojei +
+                ", knygosAutoriai=" + knygosAutoriai +
+                ", knygosKategorijos=" + knygosKategorijos +
+                ", vartotojoPamegtaKnyga=" + vartotojoPamegtaKnyga +
+                '}';
+    }
 }
