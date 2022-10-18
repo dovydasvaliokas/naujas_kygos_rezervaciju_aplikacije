@@ -8,22 +8,24 @@ public class Rezervacijos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String pavadinimas;
-
     private int kiekis;
 
     @ManyToOne
     @JoinColumn(name = "vartotojas_id")
     private Vartotojas kurisUzRezervavo;
 
+    @ManyToOne
+    @JoinColumn(name = "kuri_knyga_uzrezervuota")
+    private Knygos uzrezervuotaKnyga;
+
     public Rezervacijos() {
     }
 
-    public Rezervacijos(int id, String pavadinimas, int kiekis, Vartotojas kurisUzRezervavo) {
+    public Rezervacijos(int id, int kiekis, Vartotojas kurisUzRezervavo, Knygos uzrezervuotaKnyga) {
         this.id = id;
-        this.pavadinimas = pavadinimas;
         this.kiekis = kiekis;
         this.kurisUzRezervavo = kurisUzRezervavo;
+        this.uzrezervuotaKnyga = uzrezervuotaKnyga;
     }
 
     public int getId() {
@@ -32,14 +34,6 @@ public class Rezervacijos {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getPavadinimas() {
-        return pavadinimas;
-    }
-
-    public void setPavadinimas(String pavadinimas) {
-        this.pavadinimas = pavadinimas;
     }
 
     public int getKiekis() {
@@ -58,13 +52,21 @@ public class Rezervacijos {
         this.kurisUzRezervavo = kurisUzRezervavo;
     }
 
+    public Knygos getUzrezervuotaKnyga() {
+        return uzrezervuotaKnyga;
+    }
+
+    public void setUzrezervuotaKnyga(Knygos uzrezervuotaKnyga) {
+        this.uzrezervuotaKnyga = uzrezervuotaKnyga;
+    }
+
     @Override
     public String toString() {
         return "Rezervacijos{" +
                 "id=" + id +
-                ", pavadinimas='" + pavadinimas + '\'' +
                 ", kiekis=" + kiekis +
                 ", kurisUzRezervavo=" + kurisUzRezervavo +
+                ", uzrezervuotaKnyga=" + uzrezervuotaKnyga +
                 '}';
     }
 }

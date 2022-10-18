@@ -52,6 +52,11 @@
       </td>
   </tr>
 </table>
+<form  th:action="@{'/rezervacijos/rezervuoti_knyga/' + ${id}}" method="post">
+    <input type="number" th:value="${rezervuojamasKiekis}" name="rezervuojamasKiekis">
+    <input type="submit" value="rezervuoti knyga knyga">
+</form>
+<br>
 <form th:action="@{/knyg/visos_knygos}">
 <button class="btn btn-secondary" type="submit">Eiti atgal</button>
 </form>

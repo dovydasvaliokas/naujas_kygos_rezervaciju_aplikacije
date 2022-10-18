@@ -22,6 +22,13 @@ public class Knygos {
 
     private int kiekis;
 
+    private int rezervoutasKiekis;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "uzrezervuotaKnyga")
+    Set<Rezervacijos> knygosRezervacijos;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -57,16 +64,27 @@ public class Knygos {
     )
     private Set<Vartotojas> vartotojoPamegtaKnyga;
 
+    public boolean kiekioApskaiciavimas(int rezervuojamasKiekis){
+        if (kiekis < 0){
+            return false;
+        }
+        kiekis = kiekis - rezervuojamasKiekis;
+        rezervoutasKiekis += rezervuojamasKiekis;
+
+        return true;
+    }
+
     public Knygos() {
     }
 
-    public Knygos(int id, String pavadinimas, int puslapiuSkait, String aprasymas, String turinys, int kiekis, Set<Vartotojas> knygosVartotojei, Set<Autorius> knygosAutoriai, Set<Kategorijos> knygosKategorijos, Set<Vartotojas> vartotojoPamegtaKnyga) {
+    public Knygos(int id, String pavadinimas, int puslapiuSkait, String aprasymas, String turinys, int kiekis, int rezervoutasKiekis, Set<Vartotojas> knygosVartotojei, Set<Autorius> knygosAutoriai, Set<Kategorijos> knygosKategorijos, Set<Vartotojas> vartotojoPamegtaKnyga) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.puslapiuSkait = puslapiuSkait;
         this.aprasymas = aprasymas;
         this.turinys = turinys;
         this.kiekis = kiekis;
+        this.rezervoutasKiekis = rezervoutasKiekis;
         this.knygosVartotojei = knygosVartotojei;
         this.knygosAutoriai = knygosAutoriai;
         this.knygosKategorijos = knygosKategorijos;
@@ -153,6 +171,14 @@ public class Knygos {
         this.vartotojoPamegtaKnyga = vartotojoPamegtaKnyga;
     }
 
+    public int getRezervoutasKiekis() {
+        return rezervoutasKiekis;
+    }
+
+    public void setRezervoutasKiekis(int rezervoutasKiekis) {
+        this.rezervoutasKiekis = rezervoutasKiekis;
+    }
+
     @Override
     public String toString() {
         return "Knygos{" +
@@ -162,6 +188,7 @@ public class Knygos {
                 ", aprasymas='" + aprasymas + '\'' +
                 ", turinys='" + turinys + '\'' +
                 ", kiekis=" + kiekis +
+                ", rezervoutasKiekis=" + rezervoutasKiekis +
                 ", knygosVartotojei=" + knygosVartotojei +
                 ", knygosAutoriai=" + knygosAutoriai +
                 ", knygosKategorijos=" + knygosKategorijos +
