@@ -50,7 +50,6 @@ public class KnygosMVController {
     }
     @PostMapping("/knyg/ideta_knyga")
     String idedamaKnyga(Model model, @ModelAttribute Knygos knyga, @RequestParam String autorius){
-        System.out.println("SAVE komanda pasileido");
         Set<Autorius> autoriusVardas = knygosService.konvertavimasIsStringISet(autorius);
         knyga.setKnygosAutoriai(autoriusVardas);
         knygosRepository.save(knyga);

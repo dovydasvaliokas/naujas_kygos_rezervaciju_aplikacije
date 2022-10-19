@@ -30,6 +30,10 @@
   </tr>
   </tr>
 </table>
+<br>
+<form th:action="@{'/aut/redaguoti_autoriu/' + ${id}}" method="get">
+  <input type="submit" value="Redaguoti autoriu">
+</form>
 
 <div th:insert="/fragments/footer :: footer"></div>
 </body>

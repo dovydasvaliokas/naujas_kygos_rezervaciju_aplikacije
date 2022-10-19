@@ -6,9 +6,7 @@ import lt.knygynas.Knygu.rezervavimas.model.repository.AutoriausRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,17 +15,29 @@ public class AutoriaiMVController {
     @Autowired
     AutoriausRepository autoriausRepository;
 
+    @PostMapping("/aut/istrinti_autoriu")
+    String istrinamasAutorius(Model model, @RequestParam int id){
+        autoriausRepository.delete(autoriausRepository.findById(id));
+        return "autorius_istrintas.html";
+    }
+
+    @GetMapping("/aut/redaguoti_autoriu/{id}")
+    String redaguojamasAutorius(Model model, @PathVariable int id){
+        Autorius autorius = autoriausRepository.findById(id);
+        model.addAttribute("autorius", autorius);
+        return "redaguoti_autoriu.html";
+    }
+
     @GetMapping("/aut/naujas_autorius")
     String naujasAutorius() {
         return "ideti_autoriu.html";
     }
 
     @PostMapping("/aut/idedamas_autorius")
-    String idetiAutoriu(String vardas, String pavarde, String aprasymas) {
-        Autorius autorius = new Autorius();
-        autorius.setVardas(vardas);
-        autorius.setPavarde(pavarde);
-        autorius.setAprasymas(aprasymas);
+    String idetiAutoriu(Model model, @ModelAttribute Autorius autorius) {
+        autorius.setVardas(autorius.getVardas());
+        autorius.setPavarde(autorius.getPavarde());
+        autorius.setAprasymas(autorius.getAprasymas());
         autoriausRepository.save(autorius);
         return "idetas_autorius.html";
     }

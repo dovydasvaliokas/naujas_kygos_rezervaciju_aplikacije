@@ -14,11 +14,18 @@
 <div th:insert="/fragments/header :: header"></div>
 <div th:insert="/fragments/navbar :: navbar"></div>
 <div th:insert="/fragments/autNavbar :: autNavbar"></div>
-<form th:action="@{/aut/idedamas_autorius}" method="post">
-    <input type="text" name="vardas">
-    <input type="text" name="pavarde">
-    <input type="text" name="aprasymas">
-    <input type="submit" value="Įdėkite kategoriją">
+    <form th:action="@/aut/idedamas_autorius}" th:object="${autorius}" method="POST">
+        <input type="hidden" th:field="*{id}">
+        <p>vardas</p>
+        <input th:field="*{vardas}" type="text"  placeholder="Autoriaus Vardas" class="form-control mb-4 col-4">
+        <p>Autoriaus pavarde</p>
+        <input th:field="*{pavarde}" type="text"  placeholder="Autoriaus Pavarde" class="form-control mb-4 col-4">
+        <p>Aprasymas</p>
+        <input th:field="*{aprasymas}" type="text"  placeholder="Autoriaus aprasymas" class="form-control mb-4 col-4">
+        <br>
+        <button type="submit" class="btn btn-info col-2">Išsaugokite autoriu</button>
+
+    </form>
 </form>
 <div th:insert="fragments/footer :: footer"></div>
 </body>

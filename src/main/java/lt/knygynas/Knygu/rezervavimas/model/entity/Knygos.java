@@ -65,7 +65,7 @@ public class Knygos {
     private Set<Vartotojas> vartotojoPamegtaKnyga;
 
     public boolean kiekioApskaiciavimas(int rezervuojamasKiekis){
-        if (kiekis < 0){
+        if (kiekis <= rezervuojamasKiekis){
             return false;
         }
         kiekis = kiekis - rezervuojamasKiekis;
