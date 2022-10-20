@@ -3,6 +3,7 @@ package lt.knygynas.Knygu.rezervavimas.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -11,9 +12,27 @@ public class Vartotojas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String firstName;
+
+    private String lastName;
+
+    private String email;
     private String username;
 
     private String password;
+
+    private boolean ijungta;
+
+    private boolean tokenExpired;
+
+    @ManyToMany
+    @JoinTable(
+            name = "vartotojas_roles",
+            joinColumns = @JoinColumn(
+                    name = "vartotojo_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "roles_id", referencedColumnName = "id"))
+    private Collection<Roles> roles;
 
     @JsonIgnore
     @ManyToMany
@@ -39,10 +58,16 @@ public class Vartotojas {
     public Vartotojas() {
     }
 
-    public Vartotojas(int id, String username, String password, Set<Knygos> vartotojoKnygos, Set<Rezervacijos> vartotojoRezervacijos, Set<Knygos> megstamosKnygos) {
+    public Vartotojas(int id, String firstName, String lastName, String email, String username, String password, boolean ijungta, boolean tokenExpired, Collection<Roles> roles, Set<Knygos> vartotojoKnygos, Set<Rezervacijos> vartotojoRezervacijos, Set<Knygos> megstamosKnygos) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
         this.username = username;
         this.password = password;
+        this.ijungta = ijungta;
+        this.tokenExpired = tokenExpired;
+        this.roles = roles;
         this.vartotojoKnygos = vartotojoKnygos;
         this.vartotojoRezervacijos = vartotojoRezervacijos;
         this.megstamosKnygos = megstamosKnygos;
@@ -54,6 +79,30 @@ public class Vartotojas {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {
@@ -70,6 +119,30 @@ public class Vartotojas {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isIjungta() {
+        return ijungta;
+    }
+
+    public void setIjungta(boolean ijungta) {
+        this.ijungta = ijungta;
+    }
+
+    public boolean isTokenExpired() {
+        return tokenExpired;
+    }
+
+    public void setTokenExpired(boolean tokenExpired) {
+        this.tokenExpired = tokenExpired;
+    }
+
+    public Collection<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Roles> roles) {
+        this.roles = roles;
     }
 
     public Set<Knygos> getVartotojoKnygos() {
@@ -100,8 +173,14 @@ public class Vartotojas {
     public String toString() {
         return "Vartotojas{" +
                 "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", ijungta=" + ijungta +
+                ", tokenExpired=" + tokenExpired +
+                ", roles=" + roles +
                 ", vartotojoKnygos=" + vartotojoKnygos +
                 ", vartotojoRezervacijos=" + vartotojoRezervacijos +
                 ", megstamosKnygos=" + megstamosKnygos +
