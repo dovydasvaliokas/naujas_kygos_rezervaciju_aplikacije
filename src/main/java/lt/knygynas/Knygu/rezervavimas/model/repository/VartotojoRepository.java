@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VartotojoRepository extends JpaRepository<Vartotojas,Integer> {
     Vartotojas findById(int id);
+
+    Vartotojas findByEmail (String email);
 }
