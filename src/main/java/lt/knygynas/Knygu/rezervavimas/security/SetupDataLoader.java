@@ -75,6 +75,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Roles role = rolesRepository.findByPavadinimas(pavadinimas);
         if (role == null){
             role = new Roles();
+            role.setPavadinimas(pavadinimas);
             role.setPrivelegijos(privilegijos);
             rolesRepository.save(role);
         }
