@@ -65,6 +65,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Privilegijos privilegijos = privilegijosrepository.findByPavadinimas(pavadinimas);
         if (privilegijos == null){
             privilegijos = new Privilegijos();
+            privilegijos.setPavadinimas(pavadinimas);
             privilegijosrepository.save(privilegijos);
         }
         return privilegijos;
