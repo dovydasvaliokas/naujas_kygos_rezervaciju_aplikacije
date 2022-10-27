@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="html_head">
   <meta charset="ISO-8859-1">
   <title>Recepto įdėjimas</title>
@@ -31,8 +31,11 @@
   </tr>
 </table>
 <br>
-<form th:action="@{'/aut/redaguoti_autoriu/' + ${id}}" method="get">
-  <input type="submit" value="Redaguoti autoriu">
+<form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/aut/admin/redaguoti_autoriu/' + ${id}}" method="get">
+  <input sec:authorize="hasRole('ROLE_ADMIN')" type="submit" value="Redaguoti autoriu">
+</form>
+<form sec:authorize="hasRole('ROLE_USER')" th:action="@{'/aut/admin/istrinti_autoriu/' + ${id}}" method="get">
+  <input type="submit" value="Istrinti autoriu">
 </form>
 
 <div th:insert="/fragments/footer :: footer"></div>

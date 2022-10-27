@@ -15,21 +15,23 @@ public class AutoriaiMVController {
     @Autowired
     AutoriausRepository autoriausRepository;
 
-    @PostMapping("/aut/istrinti_autoriu")
+    @PostMapping("/aut/admin/istrinti_autoriu")
     String istrinamasAutorius(Model model, @RequestParam int id){
         autoriausRepository.delete(autoriausRepository.findById(id));
         return "autorius_istrintas.html";
     }
 
-    @GetMapping("/aut/redaguoti_autoriu/{id}")
+    @GetMapping("/aut/admin/redaguoti_autoriu/{id}")
     String redaguojamasAutorius(Model model, @PathVariable int id){
         Autorius autorius = autoriausRepository.findById(id);
         model.addAttribute("autorius", autorius);
         return "redaguoti_autoriu.html";
     }
 
-    @GetMapping("/aut/naujas_autorius")
-    String naujasAutorius() {
+    @GetMapping("/aut/admin/naujas_autorius")
+    String naujasAutorius(Model model) {
+        Autorius naujasAutorius = new Autorius();
+        model.addAttribute("autorius", naujasAutorius);
         return "ideti_autoriu.html";
     }
 

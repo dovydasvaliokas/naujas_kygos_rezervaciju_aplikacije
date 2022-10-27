@@ -14,8 +14,7 @@
 <div th:insert="/fragments/header :: header"></div>
 <div th:insert="/fragments/navbar :: navbar"></div>
 <div th:insert="/fragments/autNavbar :: autNavbar"></div>
-    <form th:action="@/aut/idedamas_autorius}" th:object="${autorius}" method="POST">
-        <input type="hidden" th:field="*{id}">
+    <form th:action="@{/aut/idedamas_autorius}" th:object="${autorius}" method="POST">
         <p>vardas</p>
         <input th:field="*{vardas}" type="text"  placeholder="Autoriaus Vardas" class="form-control mb-4 col-4">
         <p>Autoriaus pavarde</p>

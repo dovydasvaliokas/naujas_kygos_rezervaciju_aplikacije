@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+
+
 
 @Configuration
 @EnableWebSecurity
@@ -20,4 +23,35 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf()
+                .disable()
+                .authorizeRequests()
+                .and()
+                // .exceptionHandling()
+                //.accessDeniedHandler(accessDeniedHandler)
+                //.authenticationEntryPoint(restAuthenticationEntryPoint)
+                //.and()
+                .authorizeRequests()
+                .antMatchers("/*").authenticated()
+                .antMatchers("/knygos/*")
+                .authenticated()
+                .antMatchers("/kat/admin/*")
+                .hasRole("ADMIN")
+                .antMatchers("/aut/admin/*")
+                .hasAnyRole("ADMIN")
+                .antMatchers("/knyg/admin/*")
+                .hasRole("ADMIN")
+                .and()
+                .formLogin()
+                .and()
+                .httpBasic()
+                .and()
+                .logout();
+        return http.build();
+    }
+
+
 }

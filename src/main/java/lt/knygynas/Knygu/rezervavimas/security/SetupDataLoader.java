@@ -34,31 +34,41 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+   @Override
+   public void onApplicationEvent(ContextRefreshedEvent event) {
 
-        if (alreadySetup)
-            return;
+       if (alreadySetup)
+           return;
         Privilegijos skaitytiPrivilegije = sukurtiPrivilegijeJeiguJiNerasta("READ_PRIVILEGE");
         Privilegijos rasytiPrivilegije  = sukurtiPrivilegijeJeiguJiNerasta("WHRITE_PRIVILEGE");
+//
+      List<Privilegijos> adminPrivilegijos = Arrays.asList(
+               skaitytiPrivilegije, rasytiPrivilegije);
+       sukurtiRoleJeiguJiNerasta("ROLE_ADMIN", adminPrivilegijos);
+      sukurtiRoleJeiguJiNerasta("ROLE_USER", Arrays.asList(skaitytiPrivilegije));
 
-        List<Privilegijos> adminPrivilegijos = Arrays.asList(
-                skaitytiPrivilegije, rasytiPrivilegije);
-        sukurtiRoleJeiguJiNerasta("ROLE_ADMIN", adminPrivilegijos);
-        sukurtiRoleJeiguJiNerasta("ROLE_USER", Arrays.asList(skaitytiPrivilegije));
+      Roles adminRole = rolesRepository.findByPavadinimas("ROLE_ADMIN");
+       Vartotojas vartotojasADMIN = new Vartotojas();
+       vartotojasADMIN.setFirstName("vardas");
+       vartotojasADMIN.setLastName("pavarde");
+       vartotojasADMIN.setPassword(passwordEncoder.encode("qwe"));
+       vartotojasADMIN.setEmail("asd");
+       vartotojasADMIN.setRoles(Arrays.asList(adminRole));
+       vartotojasADMIN.setIjungta(true);
+       vartotojoRepository.save(vartotojasADMIN);
 
-        Roles adminRole = rolesRepository.findByPavadinimas("ROLE_ADMIN");
-        Vartotojas vartotojas = new Vartotojas();
-        vartotojas.setFirstName("vardas");
-        vartotojas.setLastName("pavarde");
-        vartotojas.setPassword(passwordEncoder.encode("slaptazodis"));
-        vartotojas.setEmail("true@as.com");
-        vartotojas.setRoles(Arrays.asList(adminRole));
-        vartotojas.setIjungta(true);
-        vartotojoRepository.save(vartotojas);
+       Roles userRole = rolesRepository.findByPavadinimas("ROLE_USER");
+       Vartotojas vartotojasUSER = new Vartotojas();
+       vartotojasUSER.setFirstName("vv");
+       vartotojasUSER.setLastName("pp");
+       vartotojasUSER.setEmail("qwe");
+       vartotojasUSER.setPassword(passwordEncoder.encode("asd"));
+       vartotojasUSER.setRoles(Arrays.asList(userRole));
+       vartotojasUSER.setIjungta(true);
+       vartotojoRepository.save(vartotojasUSER);
 
-        alreadySetup = true;
-    }
+      alreadySetup = true;
+   }
 
     @Transactional
     Privilegijos sukurtiPrivilegijeJeiguJiNerasta(String pavadinimas) {

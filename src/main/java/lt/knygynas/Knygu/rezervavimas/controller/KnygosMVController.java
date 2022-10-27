@@ -40,9 +40,8 @@ public class KnygosMVController {
         model.addAttribute("visosKnygos", visosKnygos);
         return "rodyti_knygas.html";
     }
-    @GetMapping("/knyg/knygos_idejimas")
+    @GetMapping("/knyg/admin/knygos_idejimas")
     String knygosIdejimas(Model model){
-        Vartotojas vartotojas;
         Knygos naujaKnyga = new Knygos();
         model.addAttribute("knyga", naujaKnyga);
         model.addAttribute("kategorijos", kategorijosRepository.findAll());
@@ -86,13 +85,13 @@ public class KnygosMVController {
         return "parodyti_knyga.html";
     }
 
-    @PostMapping("/knyg/istrinti_knyga/{id}")
+    @PostMapping("/knyg/admin/istrinti_knyga/{id}")
     String istrintiKyga(Model model, @PathVariable int id) {
         knygosRepository.delete(knygosRepository.findById(id));
         return "istrinta_knyga.html";
     }
 
-    @GetMapping("/knyg/redaguoti_knyga/{id}")
+    @GetMapping("/knyg/admin/redaguoti_knyga/{id}")
     String redaguojamaKnyga(Model model, @PathVariable  int id){
         Knygos knyga = knygosRepository.findById(id);
         model.addAttribute("knyga", knyga);

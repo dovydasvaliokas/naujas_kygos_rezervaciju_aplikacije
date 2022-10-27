@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Kategorijos knygos</title>
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@
 <div th:each="knyga : ${kategorijosKnygos}" class="list-group">
     <a th:text="${knyga.getPavadinimas()}" th:href="@{/knyg/rasti_knyga(pavadinimas=${knyga.getPavadinimas()})}" class="list-group-item list-group-item-action"></a></div>
 <br>
-    <form th:action="@{'/kategorija/istrinti_kategorija/' + ${id}}" method="post">
+    <form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/kat/admin/istrinti_kategorija/' + ${id}}" method="post">
         <input type="submit" value="Ištrinti kategorija">
     </form>
 <div th:insert="/fragments/footer :: footer"></div>

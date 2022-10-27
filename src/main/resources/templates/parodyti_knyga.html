@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="html_head">
   <meta charset="ISO-8859-1">
   <title>Recepto įdėjimas</title>
@@ -61,7 +61,7 @@
 <button class="btn btn-secondary" type="submit">Eiti atgal</button>
 </form>
 <br>
-<form th:action="@{'/knyg/istrinti_knyga/' + ${id}}" method="post">
+<form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/knyg/admin/istrinti_knyga/' + ${id}}" method="post">
   <input type="submit" value="Ištrinti knyga">
 </form>
 <br>
@@ -69,7 +69,7 @@
   <input type="submit" value="Pridėti knyga į mėgstamus">
 </form>
 <br>
-<form th:action="@{'/knyg/redaguoti_knyga/' + ${id}}" method="get">
+<form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/knyg/admin/redaguoti_knyga/' + ${id}}" method="get">
   <input type="submit" value="Redaguoti knyga">
 </form>
 <div th:insert="/fragments/footer :: footer"></div>

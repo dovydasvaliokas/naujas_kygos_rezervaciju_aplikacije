@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="ISO-8859-1">
   <title>Home</title>
@@ -29,7 +29,7 @@
     <div th:each="knygos : ${visosKnygos}" class="list-group">
         <a th:text=" ${knygos.getPavadinimas()} + ' ' + ${knygos.getAprasymas()}" th:href="@{/knyg/rasti_knyga_id/(id=${knygos.getId()})}" class="list-group-item list-group-item-action"></a>
     </div>
-  <form th:action="@{'/knyg/istrinti_knyga/' + ${id}}" method="post">
+  <form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/knyg/istrinti_knyga/' + ${id}}" method="post">
     <input type="submit" value="Istrinti knyga">
   </form>
     <div th:insert="/fragments/footer :: footer"></div>

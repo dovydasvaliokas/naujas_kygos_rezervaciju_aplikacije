@@ -17,18 +17,18 @@ public class KategorijosMVController {
     @Autowired
     KategorijosRepository kategorijosRepository;
 
-    @PostMapping("/kategorija/istrinti_kategorija/{id}")
+    @PostMapping("/kat/admin/istrinti_kategorija/{id}")
     String istrintiKategorija(Model model,@PathVariable int id){
         kategorijosRepository.delete(kategorijosRepository.findById(id));
         return "kategorija_istrinta.html";
     }
 
-    @GetMapping("/kategorija/nauja_kategorija")
-    String naujaKategorija(){
+    @GetMapping("/kat/admin/nauja_kategorija")
+    String naujaKategorija(Model model){
         return "ideti_kategorija.html";
     }
 
-    @PostMapping("/kategorija/idedama_kategorija")
+    @PostMapping("/kat/idedama_kategorija")
     String idetiKategorija(String pavadinimas){
         Kategorijos naujaKategorija = new Kategorijos();
         naujaKategorija.setPavadinimas(pavadinimas);
@@ -36,19 +36,19 @@ public class KategorijosMVController {
         return "ideta_kategorija.html";
     }
 
-    @GetMapping("/kategorijos/kat_skiltis")
+    @GetMapping("/kat/kat_skiltis")
     String kategorijosSkiltis(Model model){
         return "visos_kategorijos.html";
     }
 
-    @GetMapping("/kategorijos/visos_kategorijos")
+    @GetMapping("/kat/visos_kategorijos")
     String rodytiVisasKategorijas(Model model){
         List<Kategorijos> visosKategorijos = kategorijosRepository.findAll();
         model.addAttribute("visosKategorijos", visosKategorijos);
         return "visos_kategorijos.html";
     }
 
-    @GetMapping("/kategorijos/rodyti_knygas")
+    @GetMapping("/kat/rodyti_knygas")
     String rodytiKategorijjosknygos(Model model,@RequestParam int id){
         Kategorijos kategorija = kategorijosRepository.findById(id);
         model.addAttribute("id", kategorija.getId());
@@ -57,7 +57,7 @@ public class KategorijosMVController {
         return "kategorijos_knygos.html";
     }
 
-    @GetMapping("/kategorija/rasti_pagal_kategorija")
+    @GetMapping("/kat/rasti_pagal_kategorija")
     String ieskomaKategorija(Model model, @RequestParam String pavadinimas){
         Kategorijos kategorija = kategorijosRepository.findByPavadinimas(pavadinimas);
         model.addAttribute("kategorijosKnygos" ,kategorija.getKnygaSuKategorija() );

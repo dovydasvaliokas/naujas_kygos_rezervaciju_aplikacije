@@ -18,7 +18,7 @@
   <div class="container d-flex flex-column  align-items-center">
       <div class="row col-8">
           <div class="input-group">
-              <form th:action="@{/kategorija/rasti_pagal_kategorija}" class="d-flex w-100" method="get">
+              <form th:action="@{/kat/rasti_pagal_kategorija}" class="d-flex w-100" method="get">
                   <input type="text"name="autoriausVardas" class="form-control" placeholder="?veskite recepto pavadinim?...">
                   <div class="input-group-append">
                       <button class="btn btn-secondary" type="submit">
@@ -31,7 +31,7 @@
   </div>
       <p class="mt-4 text-center">Iveskite knygos kategorijos pavadinima</p>
 <div th:each="kategorija : ${visosKategorijos}" class="list-group">
-  <a th:text="${kategorija.getPavadinimas()}" th:href="@{/kategorijos/rodyti_knygas/(id=${kategorija.getId()})}" class="list-group-item list-group-item-action"></a>
+  <a th:text="${kategorija.getPavadinimas()}" th:href="@{/kat/rodyti_knygas/(id=${kategorija.getId()})}" class="list-group-item list-group-item-action"></a>
 </div>
 <div th:insert="fragments/footer :: footer"></div>
 </body>
