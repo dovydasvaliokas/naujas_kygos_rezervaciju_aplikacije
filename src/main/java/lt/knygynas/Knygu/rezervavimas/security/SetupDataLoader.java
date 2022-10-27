@@ -51,8 +51,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
        Vartotojas vartotojasADMIN = new Vartotojas();
        vartotojasADMIN.setFirstName("vardas");
        vartotojasADMIN.setLastName("pavarde");
-       vartotojasADMIN.setPassword(passwordEncoder.encode("qwe"));
-       vartotojasADMIN.setEmail("asd");
+       vartotojasADMIN.setPassword(passwordEncoder.encode("asd"));
+       vartotojasADMIN.setEmail("aaa");
        vartotojasADMIN.setRoles(Arrays.asList(adminRole));
        vartotojasADMIN.setIjungta(true);
        vartotojoRepository.save(vartotojasADMIN);
@@ -62,7 +62,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
        vartotojasUSER.setFirstName("vv");
        vartotojasUSER.setLastName("pp");
        vartotojasUSER.setEmail("qwe");
-       vartotojasUSER.setPassword(passwordEncoder.encode("asd"));
+       vartotojasUSER.setPassword(passwordEncoder.encode("qwe"));
        vartotojasUSER.setRoles(Arrays.asList(userRole));
        vartotojasUSER.setIjungta(true);
        vartotojoRepository.save(vartotojasUSER);
